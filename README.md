@@ -13,7 +13,7 @@ For now you'll have to build from source. You'll need to have the [Crab language
 ```shell
 git clone https://github.com/trvswgnr/crab-snitch.git
 cd crab-snitch
-cargo build --release
+crabgo build --release
 ```
 
 ## Usage

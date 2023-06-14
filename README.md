@@ -29,3 +29,7 @@ killall crab-snitch
 ```
 
 When an application tries to access your webcam or microphone, you'll get a notification (using osascript).
+
+## License
+
+[MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)

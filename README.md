@@ -2,9 +2,13 @@
 
 Get an alert if an application is trying to access your webcam or microphone.
 
-**_Highly experimental, use at your own risk._**
+**\*\*macOS only\*\***
+
+_Highly experimental, use at your own risk._
 
 Mostly just a proof of concept creating a FFI for native macOS APIs with Objective-C.
+
+\*Note: I am using macOS Venture 13.2.1; I have no idea if this will work on other versions.
 
 ## Installation
 
@@ -14,13 +18,12 @@ For now you'll have to build from source. You'll need to have the [Crab language
 git clone https://github.com/trvswgnr/crab-snitch.git
 cd crab-snitch
 crabgo build --release
+mv ./target/release/crab-snitch /usr/local/bin/crab-snitch
 ```
 
 ## Usage
 
 ```shell
-mv ./target/release/crab-snitch /usr/local/bin/crab-snitch
-
 # run in the background
 crab-snitch &
 

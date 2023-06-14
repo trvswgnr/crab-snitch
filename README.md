@@ -1,6 +1,6 @@
 # Crab Snitch
 
-Get an alert if an application is trying to access your webcam or microphone.
+Get an alert if an application is accessing your webcam or microphone.
 
 **\*\*macOS only\*\***
 

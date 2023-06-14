@@ -2,20 +2,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudio.h>
 
-BOOL isDeviceInUse(AVMediaType mediaType) {
-    AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInMicrophone, AVCaptureDeviceTypeExternalUnknown] mediaType:mediaType position:AVCaptureDevicePositionUnspecified];
-    NSArray *devices = discoverySession.devices;
-
-    for (AVCaptureDevice *device in devices) {
-        if ([device isInUseByAnotherApplication]) {
-            return YES;
-        }
-    }
-
-    return NO;
-}
-
-
 BOOL isMicrophoneInUse() {
     AudioObjectPropertyAddress propertyAddress = {
         kAudioHardwarePropertyDevices,
@@ -78,5 +64,24 @@ BOOL isMicrophoneInUse() {
 }
 
 BOOL isCameraInUse() {
-    return isDeviceInUse(AVMediaTypeVideo);
+    AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera, AVCaptureDeviceTypeExternalUnknown] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionUnspecified];
+    NSArray<AVCaptureDevice *> *devices = discoverySession.devices;
+    
+    for (AVCaptureDevice *device in devices) {
+        if ([device hasMediaType:AVMediaTypeVideo]) {
+            NSError *error = nil;
+            AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+            
+            if (error) {
+                // NSLog(@"Error accessing webcam: %@", error.localizedDescription);
+                return NO;
+            }
+
+            // NSLog(@"Webcam is being used by device: %@", device.localizedName);
+            return YES;
+        }
+    }
+
+    // NSLog(@"No webcam found");
+    return NO;
 }
